@@ -1,0 +1,45 @@
+rules:
+- id: variable-printf-fmt
+  message: >-
+    Avoid using non-literal format strings passed into the 'printf' family of
+    functions. If the format string is user-controllable, the application is
+    vulnerable to attack.
+  metadata:
+    references:
+    - https://www.cvedetails.com/cwe-details/134/Uncontrolled-Format-String.html
+    category: security
+    technology:
+    - c
+  languages: [c,c++]
+  severity: INFO
+  pattern-either:
+  - patterns:
+    - pattern: printf(...)
+    - pattern-not: printf("...",...)
+  - patterns:
+    - pattern: fprintf(...)
+    - pattern-not: fprintf($DEST, "...", ...)
+  - patterns:
+    - pattern: dprintf(...)
+    - pattern-not: dprintf($DEST, "...", ...)
+  - patterns:
+    - pattern: sprintf(...)
+    - pattern-not: sprintf($DEST, "...", ...)
+  - patterns:
+    - pattern: snprintf(...)
+    - pattern-not: snprintf($DEST, $SZ, "...", ...)
+  - patterns:
+    - pattern: vprintf(...)
+    - pattern-not: vprintf("...",...)
+  - patterns:
+    - pattern: vfprintf(...)
+    - pattern-not: vfprintf($DEST, "...", ...)
+  - patterns:
+    - pattern: vdprintf(...)
+    - pattern-not: vdprintf($DEST, "...", ...)
+  - patterns:
+    - pattern: vsprintf(...)
+    - pattern-not: vsprintf($DEST, "...", ...)
+  - patterns:
+    - pattern: vsnprintf(...)
+    - pattern-not: vsnprintf($DEST, $SZ, "...", ...)
