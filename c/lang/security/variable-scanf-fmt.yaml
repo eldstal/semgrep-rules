@@ -1,0 +1,33 @@
+rules:
+- id: variable-scanf-fmt
+  message: >-
+    Avoid using non-literal format strings passed into the 'scanf' family of
+    functions. If the format string is user-controllable, the application is
+    vulnerable to attack.
+  metadata:
+    references:
+    - https://www.cvedetails.com/cwe-details/134/Uncontrolled-Format-String.html
+    category: security
+    technology:
+    - c
+  languages: [c,c++]
+  severity: INFO
+  pattern-either:
+  - patterns:
+    - pattern: scanf(...)
+    - pattern-not: scanf("...",...)
+  - patterns:
+    - pattern: fscanf(...)
+    - pattern-not: fscanf($DEST, "...", ...)
+  - patterns:
+    - pattern: sscanf(...)
+    - pattern-not: sscanf($DEST, "...", ...)
+  - patterns:
+    - pattern: vscanf(...)
+    - pattern-not: vscanf("...",...)
+  - patterns:
+    - pattern: vfscanf(...)
+    - pattern-not: vfscanf($DEST, "...", ...)
+  - patterns:
+    - pattern: vsscanf(...)
+    - pattern-not: vsscanf($DEST, "...", ...)

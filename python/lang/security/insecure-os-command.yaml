@@ -1,0 +1,30 @@
+rules:
+- id: insecure-os-command
+  message: >-
+    Avoid building command strings and passing them to the system shell.
+    If user input is present within the string, the application may be vulnerable
+    to command injection. Consider using subprocess.Popen() instead.
+  metadata:
+    references:
+    - https://cwe.mitre.org/data/definitions/78.html
+    category: security
+    technology:
+    - python
+  languages: [python]
+  severity: INFO
+  pattern-either:
+  - patterns:
+    - pattern: os.system(...)
+    - pattern-not: os.system("...",...)
+  - patterns:
+    - pattern: subprocess.run(...)
+    - pattern-not: subprocess.run("...",...)
+  - patterns:
+    - pattern: subprocess.call(..., shell=True, ...)
+    - pattern-not: subprocess.call("...",...)
+  - patterns:
+    - pattern: subprocess.check_call(..., shell=True, ...)
+    - pattern-not: subprocess.check_call("...",...)
+  - patterns:
+    - pattern: subprocess.check_output(..., shell=True, ...)
+    - pattern-not: subprocess.check_output("...",...)
