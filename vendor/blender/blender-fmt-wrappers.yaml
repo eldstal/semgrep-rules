@@ -1,0 +1,195 @@
+rules:
+- id: blender-fmt-wrappers
+  message: >-
+    Avoid using non-literal format strings passed into the 'printf' family of
+    functions. If the format string is user-controllable, the application is
+    vulnerable to attack.
+  metadata:
+    references:
+    - https://www.cvedetails.com/cwe-details/134/Uncontrolled-Format-String.html
+    category: security
+    technology:
+    - c
+  languages: [c,c++]
+  severity: INFO
+  pattern-either:
+  - patterns:
+    - pattern: PRINT_MSG(...)
+    - pattern-not: PRINT_MSG("...",...)
+    - pattern-not: PRINT_MSG(TIP_("..."),...)
+    - pattern-not: PRINT_MSG(DATA_("..."),...)
+  - patterns:
+    - pattern: PRINT_ERR(...)
+    - pattern-not: PRINT_ERR("...",...)
+    - pattern-not: PRINT_ERR(TIP_("..."),...)
+    - pattern-not: PRINT_ERR(DATA_("..."),...)
+  - patterns:
+    - pattern: CACHE_PRINTF(...)
+    - pattern-not: CACHE_PRINTF("...",...)
+    - pattern-not: CACHE_PRINTF(TIP_("..."),...)
+    - pattern-not: CACHE_PRINTF(DATA_("..."),...)
+  - patterns:
+    - pattern: _RNA_warning(...)
+    - pattern-not: _RNA_warning("...",...)
+    - pattern-not: _RNA_warning(TIP_("..."),...)
+    - pattern-not: _RNA_warning(DATA_("..."),...)
+  - patterns:
+    - pattern: exr_printf(...)
+    - pattern-not: exr_printf("...",...)
+    - pattern-not: exr_printf(TIP_("..."),...)
+    - pattern-not: exr_printf(DATA_("..."),...)
+  - patterns:
+    - pattern: BLI_sprintfN(...)
+    - pattern-not: BLI_sprintfN("...",...)
+    - pattern-not: BLI_sprintfN(TIP_("..."),...)
+    - pattern-not: BLI_sprintfN(DATA_("..."),...)
+  - patterns:
+    - pattern: DEBUG_PRINTF(...)
+    - pattern-not: DEBUG_PRINTF($ARG1,"...",...)
+    - pattern-not: DEBUG_PRINTF($ARG1,TIP_("..."),...)
+    - pattern-not: DEBUG_PRINTF($ARG1,DATA_("..."),...)
+  - patterns:
+    - pattern: SNPRINTF(...)
+    - pattern-not: SNPRINTF($ARG1,"...",...)
+    - pattern-not: SNPRINTF($ARG1,TIP_("..."),...)
+    - pattern-not: SNPRINTF($ARG1,DATA_("..."),...)
+  - patterns:
+    - pattern: deg_debug_fprintf(...)
+    - pattern-not: deg_debug_fprintf($ARG1,"...",...)
+    - pattern-not: deg_debug_fprintf($ARG1,TIP_("..."),...)
+    - pattern-not: deg_debug_fprintf($ARG1,DATA_("..."),...)
+  - patterns:
+    - pattern: WM_reportf(...)
+    - pattern-not: WM_reportf($ARG1,"...",...)
+    - pattern-not: WM_reportf($ARG1,TIP_("..."),...)
+    - pattern-not: WM_reportf($ARG1,DATA_("..."),...)
+  - patterns:
+    - pattern: BKE_gpencil_modifier_set_error(...)
+    - pattern-not: BKE_gpencil_modifier_set_error($ARG1,"...",...)
+    - pattern-not: BKE_gpencil_modifier_set_error($ARG1,TIP_("..."),...)
+    - pattern-not: BKE_gpencil_modifier_set_error($ARG1,DATA_("..."),...)
+  - patterns:
+    - pattern: BLI_dynstr_appendf(...)
+    - pattern-not: BLI_dynstr_appendf($ARG1,"...",...)
+    - pattern-not: BLI_dynstr_appendf($ARG1,TIP_("..."),...)
+    - pattern-not: BLI_dynstr_appendf($ARG1,DATA_("..."),...)
+  - patterns:
+    - pattern: BLI_dynstr_vappendf(...)
+    - pattern-not: BLI_dynstr_vappendf($ARG1,"...",...)
+    - pattern-not: BLI_dynstr_vappendf($ARG1,TIP_("..."),...)
+    - pattern-not: BLI_dynstr_vappendf($ARG1,DATA_("..."),...)
+  - patterns:
+    - pattern: EDBM_op_call_silentf(...)
+    - pattern-not: EDBM_op_call_silentf($ARG1,"...",...)
+    - pattern-not: EDBM_op_call_silentf($ARG1,TIP_("..."),...)
+    - pattern-not: EDBM_op_call_silentf($ARG1,DATA_("..."),...)
+  - patterns:
+    - pattern: BKE_reports_prependf(...)
+    - pattern-not: BKE_reports_prependf($ARG1,"...",...)
+    - pattern-not: BKE_reports_prependf($ARG1,TIP_("..."),...)
+    - pattern-not: BKE_reports_prependf($ARG1,DATA_("..."),...)
+  - patterns:
+    - pattern: PyC_Err_Format_Prefix(...)
+    - pattern-not: PyC_Err_Format_Prefix($ARG1,"...",...)
+    - pattern-not: PyC_Err_Format_Prefix($ARG1,TIP_("..."),...)
+    - pattern-not: PyC_Err_Format_Prefix($ARG1,DATA_("..."),...)
+  - patterns:
+    - pattern: STR_CONCATF(...)
+    - pattern-not: STR_CONCATF($ARG1,$ARG2,"...",...)
+    - pattern-not: STR_CONCATF($ARG1,$ARG2,TIP_("..."),...)
+    - pattern-not: STR_CONCATF($ARG1,$ARG2,DATA_("..."),...)
+  - patterns:
+    - pattern: BLO_reportf_wrap(...)
+    - pattern-not: BLO_reportf_wrap($ARG1,$ARG2,"...",...)
+    - pattern-not: BLO_reportf_wrap($ARG1,$ARG2,TIP_("..."),...)
+    - pattern-not: BLO_reportf_wrap($ARG1,$ARG2,DATA_("..."),...)
+  - patterns:
+    - pattern: BMO_op_callf(...)
+    - pattern-not: BMO_op_callf($ARG1,$ARG2,"...",...)
+    - pattern-not: BMO_op_callf($ARG1,$ARG2,TIP_("..."),...)
+    - pattern-not: BMO_op_callf($ARG1,$ARG2,DATA_("..."),...)
+  - patterns:
+    - pattern: BKE_modifier_set_error(...)
+    - pattern-not: BKE_modifier_set_error($ARG1,$ARG2,"...",...)
+    - pattern-not: BKE_modifier_set_error($ARG1,$ARG2,TIP_("..."),...)
+    - pattern-not: BKE_modifier_set_error($ARG1,$ARG2,DATA_("..."),...)
+  - patterns:
+    - pattern: BKE_reportf(...)
+    - pattern-not: BKE_reportf($ARG1,$ARG2,"...",...)
+    - pattern-not: BKE_reportf($ARG1,$ARG2,TIP_("..."),...)
+    - pattern-not: BKE_reportf($ARG1,$ARG2,DATA_("..."),...)
+  - patterns:
+    - pattern: BLI_vsnprintf(...)
+    - pattern-not: BLI_vsnprintf($ARG1,$ARG2,"...",...)
+    - pattern-not: BLI_vsnprintf($ARG1,$ARG2,TIP_("..."),...)
+    - pattern-not: BLI_vsnprintf($ARG1,$ARG2,DATA_("..."),...)
+  - patterns:
+    - pattern: BLI_vsnprintf_rlen(...)
+    - pattern-not: BLI_vsnprintf_rlen($ARG1,$ARG2,"...",...)
+    - pattern-not: BLI_vsnprintf_rlen($ARG1,$ARG2,TIP_("..."),...)
+    - pattern-not: BLI_vsnprintf_rlen($ARG1,$ARG2,DATA_("..."),...)
+  - patterns:
+    - pattern: BLI_snprintf(...)
+    - pattern-not: BLI_snprintf($ARG1,$ARG2,"...",...)
+    - pattern-not: BLI_snprintf($ARG1,$ARG2,TIP_("..."),...)
+    - pattern-not: BLI_snprintf($ARG1,$ARG2,DATA_("..."),...)
+  - patterns:
+    - pattern: BLI_snprintf_rlen(...)
+    - pattern-not: BLI_snprintf_rlen($ARG1,$ARG2,"...",...)
+    - pattern-not: BLI_snprintf_rlen($ARG1,$ARG2,TIP_("..."),...)
+    - pattern-not: BLI_snprintf_rlen($ARG1,$ARG2,DATA_("..."),...)
+  - patterns:
+    - pattern: EDBM_op_callf(...)
+    - pattern-not: EDBM_op_callf($ARG1,$ARG2,"...",...)
+    - pattern-not: EDBM_op_callf($ARG1,$ARG2,TIP_("..."),...)
+    - pattern-not: EDBM_op_callf($ARG1,$ARG2,DATA_("..."),...)
+  - patterns:
+    - pattern: eevee_cryptomatte_extract_render_passes(...)
+    - pattern-not: eevee_cryptomatte_extract_render_passes($ARG1,$ARG2,"...",...)
+    - pattern-not: eevee_cryptomatte_extract_render_passes($ARG1,$ARG2,TIP_("..."),...)
+    - pattern-not: eevee_cryptomatte_extract_render_passes($ARG1,$ARG2,DATA_("..."),...)
+  - patterns:
+    - pattern: ffmpeg_log_callback(...)
+    - pattern-not: ffmpeg_log_callback($ARG1,$ARG2,"...",...)
+    - pattern-not: ffmpeg_log_callback($ARG1,$ARG2,TIP_("..."),...)
+    - pattern-not: ffmpeg_log_callback($ARG1,$ARG2,DATA_("..."),...)
+  - patterns:
+    - pattern: BMO_op_initf(...)
+    - pattern-not: BMO_op_initf($ARG1,$ARG2,$ARG3,"...",...)
+    - pattern-not: BMO_op_initf($ARG1,$ARG2,$ARG3,TIP_("..."),...)
+    - pattern-not: BMO_op_initf($ARG1,$ARG2,$ARG3,DATA_("..."),...)
+  - patterns:
+    - pattern: BMO_op_vinitf(...)
+    - pattern-not: BMO_op_vinitf($ARG1,$ARG2,$ARG3,"...",...)
+    - pattern-not: BMO_op_vinitf($ARG1,$ARG2,$ARG3,TIP_("..."),...)
+    - pattern-not: BMO_op_vinitf($ARG1,$ARG2,$ARG3,DATA_("..."),...)
+  - patterns:
+    - pattern: EDBM_op_init(...)
+    - pattern-not: EDBM_op_init($ARG1,$ARG2,$ARG3,"...",...)
+    - pattern-not: EDBM_op_init($ARG1,$ARG2,$ARG3,TIP_("..."),...)
+    - pattern-not: EDBM_op_init($ARG1,$ARG2,$ARG3,DATA_("..."),...)
+  - patterns:
+    - pattern: RNA_function_call_direct_va(...)
+    - pattern-not: RNA_function_call_direct_va($ARG1,$ARG2,$ARG3,$ARG4,"...",...)
+    - pattern-not: RNA_function_call_direct_va($ARG1,$ARG2,$ARG3,$ARG4,TIP_("..."),...)
+    - pattern-not: RNA_function_call_direct_va($ARG1,$ARG2,$ARG3,$ARG4,DATA_("..."),...)
+  - patterns:
+    - pattern: RNA_function_call_direct_va_lookup(...)
+    - pattern-not: RNA_function_call_direct_va_lookup($ARG1,$ARG2,$ARG3,$ARG4,"...",...)
+    - pattern-not: RNA_function_call_direct_va_lookup($ARG1,$ARG2,$ARG3,$ARG4,TIP_("..."),...)
+    - pattern-not: RNA_function_call_direct_va_lookup($ARG1,$ARG2,$ARG3,$ARG4,DATA_("..."),...)
+  - patterns:
+    - pattern: RNA_function_call_direct(...)
+    - pattern-not: RNA_function_call_direct($ARG1,$ARG2,$ARG3,$ARG4,"...",...)
+    - pattern-not: RNA_function_call_direct($ARG1,$ARG2,$ARG3,$ARG4,TIP_("..."),...)
+    - pattern-not: RNA_function_call_direct($ARG1,$ARG2,$ARG3,$ARG4,DATA_("..."),...)
+  - patterns:
+    - pattern: RNA_function_call_direct_lookup(...)
+    - pattern-not: RNA_function_call_direct_lookup($ARG1,$ARG2,$ARG3,$ARG4,"...",...)
+    - pattern-not: RNA_function_call_direct_lookup($ARG1,$ARG2,$ARG3,$ARG4,TIP_("..."),...)
+    - pattern-not: RNA_function_call_direct_lookup($ARG1,$ARG2,$ARG3,$ARG4,DATA_("..."),...)
+  - patterns:
+    - pattern: EDBM_op_call_and_selectf(...)
+    - pattern-not: EDBM_op_call_and_selectf($ARG1,$ARG2,$ARG3,$ARG4,"...",...)
+    - pattern-not: EDBM_op_call_and_selectf($ARG1,$ARG2,$ARG3,$ARG4,TIP_("..."),...)
+    - pattern-not: EDBM_op_call_and_selectf($ARG1,$ARG2,$ARG3,$ARG4,DATA_("..."),...)

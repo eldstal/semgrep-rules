@@ -1,0 +1,65 @@
+{
+  "functions":  {
+    "1": [
+            "PRINT_MSG",
+            "PRINT_ERR",
+            "CACHE_PRINTF",
+            "_RNA_warning",
+            "exr_printf",
+            "BLI_sprintfN"
+    ],
+
+    "2": [
+            "DEBUG_PRINTF",
+            "SNPRINTF",
+            "deg_debug_fprintf",
+            "WM_reportf",
+            "BKE_gpencil_modifier_set_error",
+            "BLI_dynstr_appendf",
+            "BLI_dynstr_vappendf",
+            "EDBM_op_call_silentf",
+            "BKE_reports_prependf",
+            "PyC_Err_Format_Prefix"
+    ],
+
+
+    "3": [
+            "STR_CONCATF",
+            "BLO_reportf_wrap",
+            "BMO_op_callf",
+            "BKE_modifier_set_error",
+            "BKE_reportf",
+            "BLI_vsnprintf",
+            "BLI_vsnprintf_rlen",
+            "BLI_snprintf",
+            "BLI_snprintf_rlen",
+            "EDBM_op_callf",
+            "eevee_cryptomatte_extract_render_passes",
+            "ffmpeg_log_callback"
+    ],
+
+
+    "4": [
+            "BMO_op_initf",
+            "BMO_op_vinitf",
+            "EDBM_op_init"
+    ],
+
+    "5": [
+            "RNA_function_call_direct_va",
+            "RNA_function_call_direct_va_lookup",
+            "RNA_function_call_direct",
+            "RNA_function_call_direct_lookup",
+            "EDBM_op_call_and_selectf"
+    ]
+  },
+  "exceptions": [
+                   "\"...\"",
+                   "TIP_(\"...\")",
+                   "DATA_(\"...\")"
+                ]
+
+}
+
+
+

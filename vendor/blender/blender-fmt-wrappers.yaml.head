@@ -1,0 +1,14 @@
+rules:
+- id: blender-fmt-wrappers
+  message: >-
+    Avoid using non-literal format strings passed into the 'printf' family of
+    functions. If the format string is user-controllable, the application is
+    vulnerable to attack.
+  metadata:
+    references:
+    - https://www.cvedetails.com/cwe-details/134/Uncontrolled-Format-String.html
+    category: security
+    technology:
+    - c
+  languages: [c,c++]
+  severity: INFO

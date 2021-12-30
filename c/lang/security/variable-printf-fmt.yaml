@@ -43,3 +43,7 @@ rules:
   - patterns:
     - pattern: vsnprintf(...)
     - pattern-not: vsnprintf($DEST, $SZ, "...", ...)
+  # This is exposed by zlib
+  - patterns:
+    - pattern: gzprintf(...)
+    - pattern-not: gzprintf($DEST, "...", ...)
