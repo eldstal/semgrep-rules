@@ -10,6 +10,7 @@
 #                   "2": [ "dprintf" ]
 #                },
 #    exceptions : [ "\"...\"", "UNQUOTE(\"...\")" ]
+# }
 #
 # Functions 1 have the format string as the first parameter
 # Functions 2 have the format string as the second parameter, etc.
